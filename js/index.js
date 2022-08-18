@@ -1,3 +1,15 @@
+
+document.addEventListener("DOMContentLoaded",()=>{
+    let usuario = JSON.parse(sessionStorage.getItem("usuario"));
+
+    if (usuario==null){
+        alert ("NO HAY USUARIO. Es necesario iniciar sesión para continuar");
+        location.href="login.html";
+    }else{
+        document.getElementById("usuario").innerHTML=usuario.nombre;
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
@@ -12,3 +24,4 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 });
+
