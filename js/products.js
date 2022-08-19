@@ -15,7 +15,7 @@ function categorias(autos){
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
                         <div class="mb-1">
-                        <h4>${auto.name + " - USD "+ auto.cost}</h4> 
+                        <h4>${auto.name + " - "+ auto.currency + " " +auto.cost}</h4> 
                         <p> ${auto.description}</p> 
                         </div>
                         <small class="text-muted">${auto.soldCount} artículos</small> 
