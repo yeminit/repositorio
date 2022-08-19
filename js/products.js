@@ -6,22 +6,24 @@ function categorias(autos){
     let listaAutos = "";
     for(let auto of autos) {
         
-        listaAutos +=
-        `<div class="list-group-item list-group-item-action">
+        listaAutos += `
+        <div class="list-group-item list-group-item-action">
             <div class="row">
                 <div class="col-3">
                     <img src="${auto.image}" alt="product image" class="img-thumbnail"> 
-                </div>
-            <div class="col">
-                <div class="d-flex w-100 justify-content-between">
-                     <div class="mb-1">
-                        <h4>${auto.name}</h4> 
+                </div>   
+                <div class="col">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div class="mb-1">
+                        <h4>${auto.name + " - USD "+ auto.cost}</h4> 
                         <p> ${auto.description}</p> 
+                        </div>
+                        <small class="text-muted">${auto.soldCount} artículos</small> 
                     </div>
-                    <small class="text-muted">${auto.soldCount} artículos</small> 
                 </div>
-            </div>
-        </div>`
+            </div>    
+        </div>
+        `
     }
 document.getElementById("paraautos").innerHTML=listaAutos ;
 }
