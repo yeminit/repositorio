@@ -25,11 +25,13 @@ function categorias(autos){
         </div>
         `
     }
-document.getElementById("paraautos").innerHTML=listaAutos ;
+document.getElementById("paraprod").innerHTML=listaAutos ;
 }
 
+let tomacategoria = localStorage.getItem("catID");
+
 document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(PRODUCT_AUTO_URL).then(function(resultObj){
+    getJSONData(PRODUCTS_URL+tomacategoria+".json").then(function(resultObj){
         if (resultObj.status === "ok")
             {
                 productos = resultObj.data;

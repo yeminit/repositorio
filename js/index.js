@@ -6,9 +6,10 @@ document.addEventListener("DOMContentLoaded",()=>{
         alert ("NO HAY USUARIO. Es necesario iniciar sesión para continuar");
         location.href="login.html";
     }else{
-        document.getElementById("usuario").innerHTML=usuario.nombre;
+        document.getElementById("user").innerHTML=usuario.nombre;
     }
 });
+
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("autos").addEventListener("click", function() {
