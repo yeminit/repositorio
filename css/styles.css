@@ -196,3 +196,13 @@ h3{
 h6{
   text-align: center;
 }
+
+.infoprod{
+  margin-left: 6cm;
+  margin-right: 6cm;
+}
+
+.checked {
+  color: green;
+}
+

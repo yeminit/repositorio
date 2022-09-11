@@ -11,7 +11,7 @@ function categorias(autos){
     for(let auto of autos) {
         
         listaAutos += `
-        <div class="list-group-item list-group-item-action">
+        <div onclick="setProdID(${auto.id})"class="list-group-item list-group-item-action">
             <div class="row">
                 <div class="col-3">
                     <img src="${auto.image}" alt="product image" class="img-thumbnail"> 
@@ -44,6 +44,11 @@ function filtrar(){
 
 
 let tomacategoria = localStorage.getItem("catID");
+
+function setProdID(id){
+    localStorage.setItem("Prodid",id);
+    window.location="product-info.html";
+}
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCTS_URL+tomacategoria+".json").then(function(resultObj){
