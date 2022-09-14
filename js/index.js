@@ -1,6 +1,6 @@
 
 document.addEventListener("DOMContentLoaded",()=>{
-    let usuario = JSON.parse(sessionStorage.getItem("usuario"));
+    let usuario = JSON.parse(localStorage.getItem("usuario"));
 
     if (usuario==null){
         alert ("NO HAY USUARIO. Es necesario iniciar sesión para continuar");

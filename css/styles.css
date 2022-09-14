@@ -202,7 +202,14 @@ h6{
   margin-right: 6cm;
 }
 
-.checked {
-  color: green;
+.paraimg{
+  float: left;
+  padding-left: 8cm;
+  padding-right: 8cm
+}
+
+.login{
+  margin-left: 6cm;
+  margin-right: 6cm;
 }
 

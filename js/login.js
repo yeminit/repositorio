@@ -6,7 +6,7 @@ function registro (){
     if (usuario.nombre=="" || usuario.clave==""){
         alert ("Para continuar debe ingresar correo y contraseña");
     }else{
-        sessionStorage.setItem("usuario", JSON.stringify(usuario));
+        localStorage.setItem("usuario", JSON.stringify(usuario));
         location.href="index.html";
     }
 }

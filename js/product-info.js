@@ -3,42 +3,27 @@ let tomaproducto = localStorage.getItem("Prodid");
 let listaimagenes = [];
 let listacomentarios = [];
 
-function mostrar(img){
-    let lista1 = ""; 
-    for(let foto of img) {
-        
-        lista1 = `
-                <div>
-                    <img src=" ${foto.images} " class="img-thumbnail"> 
-                </div>
-                `
-     };
-     document.getElementById("imagenes").innerHTML = lista1;
-};
-
 function puntuar(puntos){
     let estrellas ="";
     for (let i=1; i<=5; i++){
-        if (i=puntos){
-            estrellas += `<i class="fas fa-star checked"></i>`;
+        if (i<=puntos){
+            estrellas += `<i style="color:green;" class="fas fa-star "></i>`;
         } else {
-            estrellas += `<i class="far fa-star checked"></i>`;
+            estrellas += `<i style="color:green;" class="far fa-star "></i>`;
         }
     }
-    document-getElementById("puntos").addEventListener("change",()=>{
-        puntuar(document.getElementById("puntos").value);
-    });
+    return estrellas;
 };
 
 function comentar(com){
-    let lista2 ="";
+    let listacom ="";
     for (texto of com){
-        lista2 +=`
+        listacom +=`
         <div class="list-group-item list-group-item-action" >        
             <div class="row">
                 <div class="d-flex w-100 justify-content">
                 <div class="mb-1">
-                <p>${texto.user + " - "+ texto.dateTime + " - " + texto.score}</p> 
+                <p>${texto.user + " - "+ texto.dateTime + " - " + puntuar(texto.score)}</p> 
                 <small> ${texto.description} </small> 
                 </div>
                 </div>
@@ -46,10 +31,49 @@ function comentar(com){
         </div>  
         `
     };
-document.getElementById("comentarios").innerHTML = lista2;
+document.getElementById("comentarios").innerHTML = listacom;
 };
 
+function mostrar(imagen){
+    let listaimg = "";
+        for(let img of imagen){
+            listaimg +=`<div class="container">
+                        <div class="row">
+                        <img src=" ${img} " class="img-fluid">
+                        </div>
+                        </div>`
+        }
+    document.getElementById("imagenes").innerHTML = listaimg;
+};
 
+let fecha = new Date();
+
+let dia = fecha.getDate();
+
+let mes = fecha.getMonth()+1;
+
+let año = fecha.getFullYear();
+
+let reloj = new Date();
+
+let hora = reloj.getHours();
+
+let minutos =reloj.getMinutes();
+
+let segundos = reloj.getSeconds();
+
+function agregarcom(){
+    let coment={}
+    coment.user = localStorage.getItem("usuario"); //trae todo lo que esta guardado en local, yo solo quiero el nombre
+    coment.dateTime = año+"-"+mes+"-"+dia+" "+hora+":"+minutos+":"+segundos;
+    coment.description = document.getElementById("espaciocoment").value;
+    coment.score = puntuar(document.getElementById("puntos").value); // trae las estrellas pero no las pinta sg el numero
+    listacomentarios.push(coment);
+    document.getElementById("espaciocoment").value="";
+    comentar(listacomentarios)
+
+
+};
 
 document.addEventListener('DOMContentLoaded', ()=>{
 
@@ -61,8 +85,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
         document.getElementById("descripcion").innerHTML= datos.description;
         document.getElementById("categoria").innerHTML = datos.category;
         document.getElementById("cantidad").innerHTML = datos.soldCount;
-        mostrar(listaimagenes);
+        
     });
+
+    getJSONData(PRODUCT_INFO_URL+tomaproducto+".json").then(function(resultObj){
+        if (resultObj.status === "ok")
+            {
+                listaimagenes = resultObj.data.images;
+                mostrar(listaimagenes);
+            }
+    }); 
+
    
     getJSONData(PRODUCT_INFO_COMMENTS_URL+tomaproducto+".json").then(function(resultObj){
         if (resultObj.status === "ok")
@@ -71,4 +104,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 comentar(listacomentarios);
             }
     }); 
+
+    document.getElementById("ptosBtn").addEventListener("click",()=>{
+        agregarcom();    
+    });
 });
