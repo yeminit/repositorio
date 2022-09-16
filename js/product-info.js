@@ -64,15 +64,17 @@ let segundos = reloj.getSeconds();
 
 function agregarcom(){
     let coment={}
-    coment.user = localStorage.getItem("usuario"); //trae todo lo que esta guardado en local, yo solo quiero el nombre
+    //coment.user = localStorage.getItem("usuario"); //trae todo lo que esta guardado en local, yo solo quiero el nombre por eso agrego un campo para poner el nombre
+    coment.user = document.getElementById("nombreuser").value;
     coment.dateTime = año+"-"+mes+"-"+dia+" "+hora+":"+minutos+":"+segundos;
     coment.description = document.getElementById("espaciocoment").value;
-    coment.score = puntuar(document.getElementById("puntos").value); // trae las estrellas pero no las pinta sg el numero
+    //coment.score = document.getElementById("puntos").addEventListener("change", function(){
+        coment.score = puntuar(document.getElementById("puntos").value); // trae las estrellas pero no las pinta sg el numero
+    //}); 
     listacomentarios.push(coment);
+    document.getElementById("nombreuser").value="";
     document.getElementById("espaciocoment").value="";
     comentar(listacomentarios)
-
-
 };
 
 document.addEventListener('DOMContentLoaded', ()=>{
