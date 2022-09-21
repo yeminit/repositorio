@@ -48,7 +48,7 @@ let tomacategoria = localStorage.getItem("catID");
 function setProdID(id){
     localStorage.setItem("Prodid",id);
     window.location="product-info.html";
-}
+};
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCTS_URL+tomacategoria+".json").then(function(resultObj){

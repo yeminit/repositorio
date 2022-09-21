@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         alert ("NO HAY USUARIO. Es necesario iniciar sesión para continuar");
         location.href="login.html";
     }else{
-        document.getElementById("user").innerHTML=usuario.nombre;
+        document.getElementById("userBtn").innerHTML=usuario.nombre;
     }
 });
 
@@ -23,6 +23,9 @@ document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("muebles").addEventListener("click", function() {
         localStorage.setItem("catID", 103);
         window.location = "products.html"
+    });
+    document.getElementById("salir").addEventListener("click", function(){
+        localStorage.removeItem("usuario");
     });
 });
 

@@ -31,7 +31,14 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li >
-            <a class="nav-link" id="user">Usuario: </a>
+            <div class="dropdown">
+              <button class="btn btn-info" type="button" id="userBtn" data-bs-toggle="dropdown" aria-expanded="false">Usuario: </button>
+              <ul class="dropdown-menu" aria-labelledby="userBtn">
+                <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+                <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+                <li><a class="dropdown-item" href="index.html" id="salir">Cerrar sesión</a></li>
+              </ul>
+              </div>
           </li>
           <li class="nav-item">
           </li>
@@ -83,6 +90,12 @@
   <br><button class="btn btn-primary" type="button" id="ptosBtn">Enviar</button>
 </div>
 
+<br><h2>Productos relacionados:</h2>
+
+<hr>
+
+<div id="imagenesrel"></div>
+
 </div>
   <main>
     <div class="container">
@@ -111,6 +124,7 @@
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
   <script src="js/login.js"></script>
+  <script src="js/index.js"></script>
   
 </body>
 

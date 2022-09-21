@@ -77,6 +77,36 @@ function agregarcom(){
     comentar(listacomentarios)
 };
 
+let listaimagenesrel = [];
+
+function setIDrel(id){
+    localStorage.removeItem("Prodid");
+    localStorage.setItem("Prodid",id);
+    window.location="product-info.html";
+
+};
+
+function relacionar(imagen){
+    let listaimgrel ="";
+    for (img of imagen){
+        listaimgrel +=`
+        <div onclick="setIDrel(${img.id})">
+        <div class="row">
+            <div class="col-3">
+                <img src="${img.image}" alt="product image" class="img-thumbnail"> 
+            </div>   
+            <div class="mb-1">
+                <p>${img.name}</p> 
+            </div>
+        </div>
+        </div>       
+        `
+    };
+document.getElementById("imagenesrel").innerHTML = listaimgrel;
+};
+
+
+
 document.addEventListener('DOMContentLoaded', ()=>{
 
     fetch(PRODUCT_INFO_URL+tomaproducto+".json")
@@ -93,8 +123,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     getJSONData(PRODUCT_INFO_URL+tomaproducto+".json").then(function(resultObj){
         if (resultObj.status === "ok")
             {
-                listaimagenes = resultObj.data.images;
-                mostrar(listaimagenes);
+                listaimagenesrel = resultObj.data.relatedProducts;
+                relacionar(listaimagenesrel);
             }
     }); 
 
@@ -110,4 +140,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
     document.getElementById("ptosBtn").addEventListener("click",()=>{
         agregarcom();    
     });
+
+    getJSONData(PRODUCT_INFO_URL+tomaproducto+".json").then(function(resultObj){
+        if (resultObj.status === "ok")
+            {
+                listaimagenes = resultObj.data.images;
+                mostrar(listaimagenes);
+            }
+    }); 
+
 });
