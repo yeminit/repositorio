@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function(){
     });
     document.getElementById("salir").addEventListener("click", function(){
         localStorage.removeItem("usuario");
+        alert ("Has salido de e-Mercado, esperamos hayas tenido una linda experiencia! Si deseas volver, debes volver a registrarte. TE ESPERAMOS!")
     });
 });
 
