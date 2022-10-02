@@ -37,11 +37,21 @@ document.getElementById("comentarios").innerHTML = listacom;
 function mostrar(imagen){
     let listaimg = "";
         for(let img of imagen){
-            listaimg +=`<div class="container">
+            listaimg += `<div class="container">
                         <div class="row">
                         <img src=" ${img} " class="img-fluid">
                         </div>
                         </div>`
+
+       /* `
+    <div class="carousel-item active">
+      <img src="${img}" class="d-block w-100" alt="imagen">
+    </div>
+    <div class="carousel-item">
+      <img src="${img}" class="d-block w-100" alt="imagen">
+    </div>  
+
+         `*/
         }
     document.getElementById("imagenes").innerHTML = listaimg;
 };
@@ -68,9 +78,7 @@ function agregarcom(){
     coment.user = document.getElementById("nombreuser").value;
     coment.dateTime = año+"-"+mes+"-"+dia+" "+hora+":"+minutos+":"+segundos;
     coment.description = document.getElementById("espaciocoment").value;
-    //coment.score = document.getElementById("puntos").addEventListener("change", function(){
-        coment.score = puntuar(document.getElementById("puntos").value); // trae las estrellas pero no las pinta sg el numero
-    //}); 
+    coment.score = puntuar(document.getElementById("puntos").value); // trae las estrellas pero no las pinta sg el numero  
     listacomentarios.push(coment);
     document.getElementById("nombreuser").value="";
     document.getElementById("espaciocoment").value="";
