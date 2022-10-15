@@ -8,11 +8,12 @@ function registro (){
     }else{
         localStorage.setItem("usuario", JSON.stringify(usuario));
         location.href="index.html";
-    }
-}
+    };
+};
 
 document.addEventListener("DOMContentLoaded",()=>{
     document.getElementById("regBtn").addEventListener("click",()=>{
         registro()
-    })
-})
+    });
+
+});

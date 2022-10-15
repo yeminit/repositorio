@@ -91,7 +91,6 @@ function setIDrel(id){
     localStorage.removeItem("Prodid");
     localStorage.setItem("Prodid",id);
     window.location="product-info.html";
-
 };
 
 function relacionar(imagen){
@@ -113,8 +112,6 @@ function relacionar(imagen){
 document.getElementById("imagenesrel").innerHTML = listaimgrel;
 };
 
-
-
 document.addEventListener('DOMContentLoaded', ()=>{
 
     fetch(PRODUCT_INFO_URL+tomaproducto+".json")
@@ -125,6 +122,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
         document.getElementById("descripcion").innerHTML= datos.description;
         document.getElementById("categoria").innerHTML = datos.category;
         document.getElementById("cantidad").innerHTML = datos.soldCount;
+
+        document.getElementById("compraBtn").addEventListener("click",()=>{ 
+            let carroprods = {};
+            carroprods.foto = datos.images[0];
+            carroprods.nombre = datos.name;
+            carroprods.moneda = datos.currency;
+            carroprods.precio = datos.cost;
+
+            localStorage.setItem("carro", JSON.stringify(carroprods));
+            location.href="cart.html";
+    }); 
         
     });
 
@@ -133,7 +141,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             {
                 listaimagenesrel = resultObj.data.relatedProducts;
                 relacionar(listaimagenesrel);
-            }
+            };
     }); 
 
    
@@ -155,6 +163,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 listaimagenes = resultObj.data.images;
                 mostrar(listaimagenes);
             }
+            
     }); 
 
 });
+
+
