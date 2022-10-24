@@ -42,11 +42,12 @@
       </div>
     </div>
   </nav>
-  <main>
+  <main>  
+    <form class=" infocompras row g-3 needs-validation" novalidate>
     <br>
     <h3>Carrito de compras</h3>
 
-    <div class="infocompras">
+    <div>
     <h7 class="lead">Artículos a comprar</h7>
     <hr>
     <br>
@@ -59,6 +60,7 @@
            <th>Costo</th>
            <th>Cantidad</th>
            <th>Subtotal</th>
+           <th>Descartar</th>
           </tr>
       </thead>
       
@@ -73,13 +75,13 @@
       <br>
 
       <label for="premium">
-        <input type="radio" name="envio" id="premium"> Premium: 2 a 5 días (15%)
+        <input type="radio" name="envio" id="premium" value="0.15" > Premium: 2 a 5 días (15%)
       </label><br>
       <label for="express">
-        <input type="radio" name="envio" id="express"> Express: 5 a 8 días (7%)
+        <input type="radio" name="envio" id="express" value="0.07" > Express: 5 a 8 días (7%)
       </label><br>
       <label for="standar">
-        <input type="radio" name="envio" id="standar"> Standar: 12 a 15 días (5%)
+        <input type="radio" name="envio" id="standar" value="0.05" checked required> Standar: 12 a 15 días (5%)
       </label><br>
 
       <br>
@@ -90,25 +92,166 @@
       <div class="container" id="cuerpo">
         <div class="row">
           <div class="col">
-            <label>Calle</label>
-            <input type="text" class="form-control">
+            <label for="valexcalle">Calle</label>
+            <input type="text" class="form-control" id="valexcalle" required>
+            <div class="valid-feedback">
+              ¡Hecho!
+            </div>
+            <div class="invalid-feedback">
+              Debes ingresar la calle de la dirección de envío
+            </div>
           </div>
           <div class="col">
-            <label>Número</label>
-            <input type="number" class="form-control">
+            <label for="valexnumero">Número</label>
+            <input type="number" class="form-control" id="valexnumero" required>
+            <div class="valid-feedback">
+              ¡Hecho!
+            </div>
+            <div class="invalid-feedback">
+              Debes ingresar el N° de la dirección de envío
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <label>Esquina</label>
-            <input type="text" class="form-control">
+            <label for="valexesquina">Esquina</label>
+            <input type="text" class="form-control" id="valexesquina" required>
+            <div class="valid-feedback">
+              ¡Hecho!
+            </div>
+            <div class="invalid-feedback">
+              Debes ingresar la esquina de la dirección de envío
+            </div>
           </div>
-
+        </div>
+      </div>
       
+      <br>
+      <h7 class="lead">Costos</h7>
+      <hr>
+      <br>
 
-
+      <div>
+        <div class="row">
+            <div class="col-3 list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                <div class="mb-1">
+                <h7><strong>Subtotal</strong></h7>
+                <p>Costo unitario del producto por cantidad seleccionada</p>
+                </div>
+                <small class="text-muted" id="sumatoriasubtotales">USD </small>
+              </div>
+            </div>   
+            <div class="col-3 list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <div class="mb-1">
+                    <h7><strong>Costo de envío</strong></h7> 
+                    <p>Según tipo de envío seleccionado</p> 
+                    </div>
+                    <small class="text-muted" id="costoenvio">USD </small> 
+                </div>
+            </div>
+            <div class="col-3 list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                  <div class="mb-1">
+                  <h7><strong>Total U$S</strong></h7> 
+                  </div>
+                  <small class="text-muted" id="costototal">USD </small> 
+              </div>
+          </div>
+        </div>    
     </div>
-  </main>
+
+      <br>
+      <h7 class="lead">Forma de pago</h7>
+      <hr>
+      <br>
+
+      <span>No hay forma de pago seleccionada</span><br>
+      <span style="color:green" id="selectforma">Haga su selección aquí:</span>
+      <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#pagosModal">Seleccionar</button>
+      
+      <div class="modal fade" id="pagosModal" tabindex="-1" aria-labelledby="pagosModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Forma de pago</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+          <div class="modal-body">
+
+              <label for="tarj">
+                <input type="radio" name="pagos" id="tarj" required> Tarjeta de crédito
+              </label><br>
+              <hr>
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <label for="numtarjeta">Número de tarjeta</label>
+                    <input type="text" class="form-control" id="numtarjeta" required>
+                    <div class="valid-feedback">
+                      ¡Hecho!
+                    </div>
+                    <div class="invalid-feedback">
+                      Ingresa el N° de tarjeta
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="codseguridad">Código de seguridad</label>
+                    <input type="number" class="form-control" id="codseguridad" required>
+                  </div>
+                  <div class="valid-feedback">
+                    ¡Hecho!
+                  </div>
+                  <div class="invalid-feedback">
+                    Se te ha olvidado el código de seguridad
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label for="vtotarjeta">Vencimiento MM/AA</label>
+                    <input type="text" class="form-control" id="vtotarjeta" required>
+                    <div class="valid-feedback">
+                      ¡Hecho!
+                    </div>
+                    <div class="invalid-feedback">
+                      Debes ingresar el vencimiento de la tarjeta
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <label for="trf">
+                <input type="radio" name="pagos" id="trf" required> Transferencia bancaria
+              </label><br>
+              <hr>
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <label for="numcuenta">Número de cuenta</label>
+                    <input type="text" class="form-control" id="numcuenta" required>
+                    <div class="valid-feedback">
+                      ¡Hecho!
+                    </div>
+                    <div class="invalid-feedback">
+                      Recuerda ingresar el N° de cuenta
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>              
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info" data-bs-dismiss="modal" id="cierramodal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div><br>
+
+      <br>
+      <button type="submit" class=" lead btn btn-info form-control" style="color:aliceblue">Finalizar compra</button>
+  </form>
+</main>
 
   <footer class="text-muted">
     <div class="container">

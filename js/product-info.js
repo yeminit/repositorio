@@ -43,11 +43,11 @@ function mostrar(imagen){
                         </div>
                         </div>`
 
-       /* `
-    <div class="carousel-item active">
+        /*`
+    <div class="carousel-item active" data-bs-interval="2000">
       <img src="${img}" class="d-block w-100" alt="imagen">
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item" data-bs-interval="2000">
       <img src="${img}" class="d-block w-100" alt="imagen">
     </div>  
 
@@ -112,6 +112,8 @@ function relacionar(imagen){
 document.getElementById("imagenesrel").innerHTML = listaimgrel;
 };
 
+//let carrocargado = [];
+
 document.addEventListener('DOMContentLoaded', ()=>{
 
     fetch(PRODUCT_INFO_URL+tomaproducto+".json")
@@ -123,15 +125,21 @@ document.addEventListener('DOMContentLoaded', ()=>{
         document.getElementById("categoria").innerHTML = datos.category;
         document.getElementById("cantidad").innerHTML = datos.soldCount;
 
-        document.getElementById("compraBtn").addEventListener("click",()=>{ 
+        document.getElementById("compraBtn").addEventListener("click",()=>{
+
+            /*if (localStorage.getItem("carro")==null){
+                localStorage.setItem("carro","[]")
+            } else {
+            let carrocargado = JSON.parse(localStorage.getItem("carro"))*/
             let carroprods = {};
             carroprods.foto = datos.images[0];
             carroprods.nombre = datos.name;
             carroprods.moneda = datos.currency;
             carroprods.precio = datos.cost;
-
+            //carrocargado.push(carroprods);
             localStorage.setItem("carro", JSON.stringify(carroprods));
-            location.href="cart.html";
+            location.href="cart.html";    
+        
     }); 
         
     });
