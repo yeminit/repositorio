@@ -223,3 +223,11 @@ h6{
   margin-left: 8cm;
   margin-right: 8cm;
 }
+
+.pendiente{
+  color: rgb(189, 11, 11);
+}
+
+.exito{
+  color: green;
+}

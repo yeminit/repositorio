@@ -3,6 +3,13 @@ console.log(nuevacompra)
 
 let carrodecompras = [];
 
+let btnpapelera = document.getElementsByName("papelera");
+
+function eliminar(item){
+    carrodecompras.splice(item,1);
+    mostrarcompra();
+};
+
 function mostrarcarro(compra){
    let carro ="";
    for(let info of compra){
@@ -10,22 +17,15 @@ function mostrarcarro(compra){
     <tr>
     <td><img src= ${info.image} width=100></td>
     <td>${info.name}</td>
-    <td class="Punit"><span>${info.currency}</span>${info.unitCost}</td>
-    <td><input onchange="subtotalizar()" name="Q" type="number" style="width: 1.5cm" placeholder="1"></td>
-    <td class="subtotalPxQ"> </td>
+    <td><span class="moneda">${info.currency}</span> <span class="Punit">${info.unitCost}</span></td>
+    <td><input onchange="subtotalizar()" name="Q" type="number" style="width: 1.5cm" placeholder="1" min="1" required></td>
+    <td><span>${info.currency}</span> <span class="subtotalPxQ"> </span></td>
     <td><img src="img/papelera.png" width=40 name="papelera"></td>
     </tr>`
     };
-
 document.getElementById("artencarro").innerHTML = carro;
+
 };
-
-let btnpapelera = document.getElementsByName("papelera");
-
-function eliminar(item){
-    carrodecompras.splice(item,1);
-    mostrarcompra();
-}
 
 function mostrarcompra(){
 
@@ -36,13 +36,13 @@ function mostrarcompra(){
     compra.unitCost = nuevacompra.precio;
     carrodecompras.push(compra);
     mostrarcarro(carrodecompras);
-    
+
     for (let i=0; i< btnpapelera.length; i++){
-            btnpapelera[i].addEventListener('click',()=>{
-            eliminar(i);
-        })
-       
-    }
+        btnpapelera[i].addEventListener('click',()=>{
+        eliminar(i);
+        });
+    };
+    
 };
 
 let tipoenvio = document.getElementsByName("envio");
@@ -50,29 +50,49 @@ let tipoenvio = document.getElementsByName("envio");
 function subtotalizar(){
     let cantidades = document.getElementsByName("Q");
     let precios = document.getElementsByClassName("Punit");
+    let subtotales = document.getElementsByClassName("subtotalPxQ");
+    let monedas = document.getElementsByClassName("moneda");
 
     let subtotal = 0;
+
     for (let i=0; i< cantidades.length; i++){
-      subtotal = parseFloat(precios[i].innerHTML) * parseFloat(cantidades[i].value);
-      document.getElementsByClassName("subtotalPxQ").innerHTML = subtotal[i]; 
-    }
-    
+        
+        if((monedas[i].innerHTML) == "UYU"){
+            subtotal += (parseFloat(precios[i].innerHTML)/40) * parseFloat(cantidades[i].value);
+        } else {
+            subtotal += (parseFloat(precios[i].innerHTML)) * parseFloat(cantidades[i].value);
+        };
+      subtotales[i].innerHTML = parseFloat(precios[i].innerHTML) * parseFloat(cantidades[i].value); 
+    };
 
     let calculoenvio = 0;
-    for (let i=0; i< tipoenvio.length; i++){
-        if (tipoenvio[i].checked){
-            calculoenvio = subtotal * parseFloat(tipoenvio[i].value);
-        }
-    }
+    for (let z=0; z< tipoenvio.length; z++){
+        if (tipoenvio[z].checked){
+            calculoenvio = subtotal* parseFloat(tipoenvio[z].value);
+        };
+    };
 
-    document.getElementById("sumatoriasubtotales").innerHTML = subtotal;
-    document.getElementById("costoenvio").innerHTML = calculoenvio;
-    document.getElementById("costototal").innerHTML = subtotal + calculoenvio;
-   
-    console.log(cantidades);
-    console.log(precios);
-    console.log(subtotal);
+    document.getElementById("sumatoriasubtotales").innerHTML ="USD " + subtotal;
+    document.getElementById("costoenvio").innerHTML ="USD " + (calculoenvio).toFixed(0);
+    document.getElementById("costototal").innerHTML ="USD " + (subtotal + calculoenvio);
+
 };
+
+function chequearenvio(){
+
+    let checkenvio1 = document.getElementById("premium").checked;
+    let checkenvio2 = document.getElementById("express").checked;
+    let checkenvio3 = document.getElementById("standar").checked;
+    
+    if(checkenvio1 || checkenvio2 || checkenvio3){
+        document.getElementById("feedbacktipoe").classList.remove("pendiente");
+        document.getElementById("feedbacktipoe").classList.add("exito");
+        document.getElementById("feedbacktipoe").innerHTML = "Tipo de envío seleccionado";
+      
+    } else {
+        document.getElementById("feedbacktipoe").innerHTML = "Recuerda seleccionar un envío";
+    };
+  };
 
 function deshabilitar(){
     if(document.getElementById("tarj").checked){
@@ -92,26 +112,9 @@ function deshabilitar(){
     };
 };
 
-
-//Comienza código para validación (desde bootstrap)
-(function () {
-    'use strict'
-
-    var forms = document.querySelectorAll('.needs-validation')
-  
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-  
-          form.classList.add('was-validated')
-        }, false)
-      })
-  })()
-// Termina código para validación
+function validar(){
+    document.getElementById("alert-success").classList.add("show");
+  };
 
 document.addEventListener("DOMContentLoaded",()=>{
 
@@ -125,6 +128,12 @@ document.addEventListener("DOMContentLoaded",()=>{
             }
     });
 
+    for (let i=0; i< tipoenvio.length; i++){
+        tipoenvio[i].addEventListener('click',()=>{
+            subtotalizar();
+        });
+    };
+
     document.getElementById("tarj").addEventListener("click",()=>{
         deshabilitar()
     });
@@ -132,11 +141,36 @@ document.addEventListener("DOMContentLoaded",()=>{
         deshabilitar()
     });
     document.getElementById("cierramodal").addEventListener("click",()=>{
-        let tarjcredito = document.getElementById("tarj")        
-        if(tarjcredito.checked){
+        let tarjcredito = document.getElementById("tarj")
+        let transfer = document.getElementById("trf")
+        let Ntarj = document.getElementById("numtarjeta")
+        let Cseg = document.getElementById("codseguridad")
+        let Vtarj = document.getElementById("vtotarjeta")
+        let Ncta = document.getElementById("numcuenta") 
+
+        if(tarjcredito.checked && Ntarj.checkValidity() && Cseg.checkValidity() && Vtarj.checkValidity()){
             document.getElementById("selectforma").innerHTML = "Tarjeta de crédito"
-        } else {
+            document.getElementById("selectforma").classList.remove("pendiente")
+            document.getElementById("selectforma").classList.add("exito") 
+        } else if (transfer.checked && Ncta.checkValidity()){
             document.getElementById("selectforma").innerHTML = "Transferencia bancaria"
+            document.getElementById("selectforma").classList.remove("pendiente")
+            document.getElementById("selectforma").classList.add("exito")
         };
     });
+
+    document.getElementById("formcarrito").addEventListener('submit', function (event) {
+        if (!this.checkValidity()) {
+            chequearenvio()
+            event.preventDefault()
+            event.stopPropagation()
+        } 
+            
+        document.body.classList.add('was-validated');
+        if(form.checkValidity()){
+        validar();
+        location.href="index.html";
+        }
+    });
+
 });

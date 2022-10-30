@@ -43,7 +43,7 @@
     </div>
   </nav>
   <main>  
-    <form class=" infocompras row g-3 needs-validation" novalidate>
+    <form class=" infocompras row g-3 needs-validation" id="formcarrito" novalidate>
     <br>
     <h3>Carrito de compras</h3>
 
@@ -75,14 +75,16 @@
       <br>
 
       <label for="premium">
-        <input type="radio" name="envio" id="premium" value="0.15" > Premium: 2 a 5 días (15%)
+        <input type="radio" name="envio" id="premium" value="0.15" required> Premium: 2 a 5 días (15%)
       </label><br>
       <label for="express">
-        <input type="radio" name="envio" id="express" value="0.07" > Express: 5 a 8 días (7%)
+        <input type="radio" name="envio" id="express" value="0.07" required> Express: 5 a 8 días (7%)
       </label><br>
       <label for="standar">
-        <input type="radio" name="envio" id="standar" value="0.05" checked required> Standar: 12 a 15 días (5%)
+        <input type="radio" name="envio" id="standar" value="0.05" required> Standar: 12 a 15 días (5%)
       </label><br>
+      <span id="feedbacktipoe" class="pendiente"></span>
+      <br>
 
       <br>
       <h7 class="lead">Dirección de envío</h7>
@@ -139,7 +141,7 @@
                 <h7><strong>Subtotal</strong></h7>
                 <p>Costo unitario del producto por cantidad seleccionada</p>
                 </div>
-                <small class="text-muted" id="sumatoriasubtotales">USD </small>
+                <small class="text-muted" id="sumatoriasubtotales"> </small>
               </div>
             </div>   
             <div class="col-3 list-group-item list-group-item-action">
@@ -148,7 +150,7 @@
                     <h7><strong>Costo de envío</strong></h7> 
                     <p>Según tipo de envío seleccionado</p> 
                     </div>
-                    <small class="text-muted" id="costoenvio">USD </small> 
+                    <small class="text-muted" id="costoenvio"> </small> 
                 </div>
             </div>
             <div class="col-3 list-group-item list-group-item-action">
@@ -156,7 +158,7 @@
                   <div class="mb-1">
                   <h7><strong>Total U$S</strong></h7> 
                   </div>
-                  <small class="text-muted" id="costototal">USD </small> 
+                  <small class="text-muted" id="costototal"> </small> 
               </div>
           </div>
         </div>    
@@ -167,8 +169,8 @@
       <hr>
       <br>
 
-      <span>No hay forma de pago seleccionada</span><br>
-      <span style="color:green" id="selectforma">Haga su selección aquí:</span>
+      <span>Haz tu selección aquí:</span><br>
+      <span id="selectforma" class="pendiente">No hay forma de pago seleccionada</span>
       <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#pagosModal">Seleccionar</button>
       
       <div class="modal fade" id="pagosModal" tabindex="-1" aria-labelledby="pagosModalLabel" aria-hidden="true">
@@ -188,7 +190,7 @@
                 <div class="row">
                   <div class="col">
                     <label for="numtarjeta">Número de tarjeta</label>
-                    <input type="text" class="form-control" id="numtarjeta" required>
+                    <input type="number" class="form-control" id="numtarjeta" minlength="16" maxlength="16" required>
                     <div class="valid-feedback">
                       ¡Hecho!
                     </div>
@@ -198,7 +200,7 @@
                   </div>
                   <div class="col">
                     <label for="codseguridad">Código de seguridad</label>
-                    <input type="number" class="form-control" id="codseguridad" required>
+                    <input type="number" class="form-control" id="codseguridad" minlength="3" maxlength="3" required>
                   </div>
                   <div class="valid-feedback">
                     ¡Hecho!
@@ -210,7 +212,7 @@
                 <div class="row">
                   <div class="col">
                     <label for="vtotarjeta">Vencimiento MM/AA</label>
-                    <input type="text" class="form-control" id="vtotarjeta" required>
+                    <input type="date" class="form-control" id="vtotarjeta" required>
                     <div class="valid-feedback">
                       ¡Hecho!
                     </div>
@@ -229,7 +231,7 @@
                 <div class="row">
                   <div class="col">
                     <label for="numcuenta">Número de cuenta</label>
-                    <input type="text" class="form-control" id="numcuenta" required>
+                    <input type="number" class="form-control" id="numcuenta" required>
                     <div class="valid-feedback">
                       ¡Hecho!
                     </div>
@@ -263,6 +265,12 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+
+  <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
+    <p>¡Tu compra ha sido exitosa!</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
