@@ -3,7 +3,12 @@ document.addEventListener("DOMContentLoaded",()=>{
     let usuario = JSON.parse(localStorage.getItem("usuario"));
 
     if (usuario==null){
-        alert ("NO HAY USUARIO. Es necesario iniciar sesión para continuar");
+        Swal.fire({
+            icon: 'error',
+            title: 'NO HAY USUARIO',
+            text: 'Es necesario iniciar sesión para continuar',
+            
+          })
         location.href="login.html";
     }else{
         document.getElementById("userBtn").innerHTML=usuario.nombre;
@@ -27,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("salir").addEventListener("click", function(){
         localStorage.removeItem("usuario");
         localStorage.removeItem("carro");
-        alert ("Has salido de e-Mercado, esperamos hayas tenido una linda experiencia! Si deseas volver, debes volver a registrarte. TE ESPERAMOS!")
+        localStorage.removeItem("perfil");
     });
 });
 

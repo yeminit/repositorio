@@ -219,7 +219,7 @@ h6{
   text-align: center;
 }
 
-.infocompras{
+.infocompras, .infoperfil{
   margin-left: 8cm;
   margin-right: 8cm;
 }
@@ -231,3 +231,4 @@ h6{
 .exito{
   color: green;
 }
+

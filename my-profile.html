@@ -58,11 +58,78 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <form class="infoperfil row g-3 needs-validation" id="formperfil" novalidate>
+       
+      <div>
+      <br>
+      <h2 class="lead">Perfil</h2>
+      <hr>
       </div>
-    </div>
+      <br>
+      
+      <div class="container" >
+        <div>
+          <img src="img/silueta2.webp" alt="product image" class="img-thumbnail" width="120" > 
+        </div> 
+        <br>  
+        <div class="row">
+          <div class="col">
+            <label for="nombre1">Primer nombre*</label>
+            <input type="text" class="form-control" id="nombre1" required>
+            <div class="valid-feedback">
+              ¡Hecho!
+            </div>
+            <div class="invalid-feedback">
+              Para continuar, agrega al menos un nombre
+            </div>
+          </div>
+          <div class="col">
+            <label for="nombre2">Segundo nombre</label>
+            <input type="text" class="form-control" id="nombre2" >
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="apellido1">Primer apellido*</label>
+            <input type="text" class="form-control" id="apellido1" required>
+            <div class="valid-feedback">
+              ¡Hecho!
+            </div>
+            <div class="invalid-feedback">
+              Tambien debes ingresar tu apellido
+            </div>
+          </div>
+          <div class="col">
+            <label for="apellido2">Segundo apellido</label>
+            <input type="text" class="form-control" id="apellido2">
+          </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="correousuario">Email*</label>
+              <input type="text" class="form-control" id="correousuario" required>
+              <div class="valid-feedback">
+                ¡Hecho!
+              </div>
+            </div>
+            <div class="col">
+              <label for="tel">Teléfono de contacto</label>
+              <input type="number" class="form-control" id="tel" minlength="8">
+            </div>
+          </div>
+
+          <span style="color:darkorange">* Campos requeridos</span>
+        </div>
+
+        <br>
+
+        <label for="imgperfil">Agrega un foto de perfil. Eligela aquí:</label><br>
+
+        <input type="file" id="imgperfil" name="imgperfil" accept="image/png, image/jpeg">
+        <br>
+        <hr>
+        <button type="submit" class="btn btn-info" style="float: right;" id="btnperfil" >Guardar cambios</button>  
+    </form>
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -78,6 +145,7 @@
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>
   <script src="js/index.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 </body>
 
 </html>

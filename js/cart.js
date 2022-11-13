@@ -164,13 +164,18 @@ document.addEventListener("DOMContentLoaded",()=>{
             chequearenvio()
             event.preventDefault()
             event.stopPropagation()
-        } 
+        } else {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Tu compra se realizó con éxito!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+        }
             
         document.body.classList.add('was-validated');
-        if(form.checkValidity()){
-        validar();
-        location.href="index.html";
-        }
+        
     });
 
 });
